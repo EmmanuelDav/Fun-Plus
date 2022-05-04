@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
 
+import 'Home.dart';
+
 void main() => runApp(MyApp());
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -25,9 +28,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class MyHomePage extends StatefulWidget {
   final String title;
+
   MyHomePage({this.title});
+
   @override
   MyHomePageState createState() {
     return new MyHomePageState();
@@ -36,7 +42,6 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   int _slideIndex = 0;
-  final GlobalKey<ScaffoldState> _key = new GlobalKey<ScaffoldState>();
   final List<String> images = [
     "assets/slide_1.png",
     "assets/slide_2.png",
@@ -61,6 +66,7 @@ class MyHomePageState extends State<MyHomePage> {
   ];
 
   final IndexController controller = IndexController();
+
   @override
   Widget build(BuildContext context) {
     TransformerPageView transformerPageView = TransformerPageView(
@@ -74,79 +80,99 @@ class MyHomePageState extends State<MyHomePage> {
         controller: controller,
         transformer: new PageTransformerBuilder(
             builder: (Widget child, TransformInfo info) {
-              return new Material(
-                color: Colors.white,
-                elevation: 8.0,
-                textStyle: new TextStyle(color: Colors.white),
-                borderRadius: new BorderRadius.circular(12.0),
-                child: new Container(
-                  alignment: Alignment.center,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new ParallaxContainer(
-                          child: new Text(
-                            text0[info.index],
-                            style: new TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 34.0,
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          position: info.position,
-                          opacityFactor: .8,
-                          translationFactor: 400.0,
-                        ),
-                        SizedBox(
-                          height: 45.0,
-                        ),
-                        new ParallaxContainer(
-                          child: new Image.asset(
-                            images[info.index],
-                            fit: BoxFit.contain,
-                            height: 350,
-                          ),
-                          position: info.position,
-                          translationFactor: 400.0,
-                        ),
-                        SizedBox(
-                          height: 45.0,
-                        ),
-                        new ParallaxContainer(
-                          child: new Text(
-                            text1[info.index],
-                            textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 28.0,
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          position: info.position,
-                          translationFactor: 300.0,
-                        ),
-                        SizedBox(
-                          height: 55.0,
-                        ),
-                        new ParallaxContainer(
-                          position: info.position,
-                          translationFactor: 500.0,
-                          child: Dots(
-                            controller: controller,
-                            slideIndex: _slideIndex,
-                            numberOfDots: images.length,
-                          ),
-                        )
-                      ],
+          return new Material(
+            color: Colors.white,
+            elevation: 8.0,
+            textStyle: new TextStyle(color: Colors.white),
+            borderRadius: new BorderRadius.circular(12.0),
+            child: new Container(
+              alignment: Alignment.center,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    new ParallaxContainer(
+                      child: new Text(
+                        text0[info.index],
+                        style: new TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 34.0,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      position: info.position,
+                      opacityFactor: .8,
+                      translationFactor: 400.0,
                     ),
-                  ),
+                    SizedBox(
+                      height: 45.0,
+                    ),
+                    new ParallaxContainer(
+                      child: new Image.asset(
+                        images[info.index],
+                        fit: BoxFit.contain,
+                        height: 350,
+                      ),
+                      position: info.position,
+                      translationFactor: 400.0,
+                    ),
+                    SizedBox(
+                      height: 45.0,
+                    ),
+                    new ParallaxContainer(
+                      child: new Text(
+                        text1[info.index],
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 28.0,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      position: info.position,
+                      translationFactor: 300.0,
+                    ),
+                    SizedBox(
+                      height: 55.0,
+                    ),
+                    new ParallaxContainer(
+                      position: info.position,
+                      translationFactor: 500.0,
+                      child: Dots(
+                        controller: controller,
+                        slideIndex: _slideIndex,
+                        numberOfDots: images.length,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 55.0,
+                    ),
+                    Container (
+                      margin: EdgeInsets.all(10),
+                      alignment: Alignment.centerRight,
+                      child: _slideIndex == 3? ElevatedButton(
+                        child: Text("Continue"),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  Home()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.orange,
+                            textStyle: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
+                      ): null,
+                    )
+                  ],
                 ),
-              );
-            }),
+              ),
+            ),
+          );
+        }),
         itemCount: 4);
 
     return Scaffold(
@@ -155,11 +181,12 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-class Dots extends StatelessWidget {
 
+class Dots extends StatelessWidget {
   final IndexController controller;
   final int slideIndex;
   final int numberOfDots;
+
   Dots({this.controller, this.slideIndex, this.numberOfDots});
 
   List<Widget> _generateDots() {
@@ -215,8 +242,8 @@ class Dots extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _generateDots(),
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: _generateDots(),
+    ));
   }
 }

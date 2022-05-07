@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-class Home extends StatelessWidget {
+import 'package:fun_pluz/HomeFragment.dart';
 
+
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,72 +19,51 @@ class Home extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState()
-  {
-    return _MyHomePageState();
-  }
+  State<StatefulWidget> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  //List<String> _titles = ["Home", "Profile", "Shop"];
+class MyHomePageState extends State<MyHomePage> {
   List<Widget> _items = [
-    Text(
-      'Index 0: Home',
-    ),
-    Text(
-      'Index 1: Profile',
-    ),
-    Text(
-      'Index 2: Shop',
-    ),
+    Text("Third page"),
+    new HomeFragment(),
+    Text("forth page"),
+    Text("fifth page")
   ];
-  int _selectedIndex = 0;
+  int _selectedState = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Flutter Learning"),
+      appBar: AppBar(title: Text("Flutter app test")),
+      body: IndexedStack(
+        index: _selectedState,
+        children: _items,
       ),
-      body:Center(
-          child: IndexedStack(
-              index: _selectedIndex,
-              children: _items
-          )//_items.elementAt(_index),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_to_home_screen), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favourite'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        currentIndex: _selectedState,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        elevation: 20,
+        onTap: _OnTap,
       ),
-      bottomNavigationBar: _showBottomNav(),
     );
   }
 
-  Widget _showBottomNav()
-  {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Profile',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag),
-          label: 'Shop',
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Colors.green,
-      unselectedItemColor: Colors.grey,
-      onTap: _onTap,
-    );
+  void _OnTap(int index) {
+    _selectedState = index;
+    setState(() {});
   }
 
-  void _onTap(int index)
-  {
-    _selectedIndex = index;
-    setState(() {
-
-    });
-  }
 }
+
+

@@ -82,6 +82,33 @@ class Home extends State<HomeFragment> {
             height: 120,
             child: Expanded(child: listItems()
             ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+
+              children: [
+                 Container(
+                   margin: EdgeInsets.all(10),
+                   child: Text("Our Service",
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          color: Colors.blue,
+                          fontSize: 14)),
+                 ),
+                Flexible(
+                   child: Container(
+                     alignment: Alignment.topRight,
+                     margin: EdgeInsets.all(10),
+                     child: Text("View more",
+                        style: TextStyle(
+                            fontFamily: 'Quicksand',
+                            color: Colors.grey,
+                            fontSize: 12)),
+                   ),
+                 )
+              ],
+            ),
           )
         ],
       ),

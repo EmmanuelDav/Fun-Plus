@@ -8,7 +8,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Learning',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -35,7 +34,8 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter app test")),
+      appBar: AppBar(title: Text(""),backgroundColor: Colors.transparent,elevation: 0,
+      ),
       body: IndexedStack(
         index: _selectedState,
         children: _items,

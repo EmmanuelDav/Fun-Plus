@@ -90,13 +90,12 @@ class Home extends State<HomeFragment> {
                             color: Colors.grey,
                             fontSize: 12)),
                    ),
-                 ),
+                ),
               ],
             ),
           ),
           Container(
-            height: 250,
-            child: Expanded(child: listItems()
+            child: Expanded(child: verticalList()
             ),
           )
         ],
@@ -140,5 +139,41 @@ class Home extends State<HomeFragment> {
           );
         });
   }
+  Widget verticalList(){
+    return ListView.builder(itemCount: data.length, itemBuilder:(context, index) => MyExpandableWidget(data[index])
+    );
+  }
+  
+}
+
+class MyExpandableWidget extends StatelessWidget {
+  final League league;
+  MyExpandableWidget(this.league);
+
+  @override
+  Widget build(BuildContext context) {
+    if (league.listClubs.isEmpty) return ListTile(title: Text(league.leagueName));
+    return ExpansionTile(key: PageStorageKey<League>(league),
+      title: Text(league.leagueName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.pinkAccent)),
+      children: league.listClubs.map<Widget>((club) => showClubs(club)).toList(),
+    );
+  }
+}
+
+showClubs(Club club) {
+  return new ExpansionTile(
+    key: PageStorageKey<Club>(club),
+    title: Text(club.clubName, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.purpleAccent),),
+    children: club.listPlayers.map<Widget>((player) => showPlayers(player)).toList(),
+  );
+}
+
+showPlayers(Player player) {
+  return new ListTile(
+    title: new Text(
+      player.playerName,
+      style: new TextStyle(fontSize: 20),
+    ),
+  );
 }
 

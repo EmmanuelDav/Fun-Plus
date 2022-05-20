@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fun_pluz/screens/Home.dart';
-
+import 'package:fun_pluz/screens/categories.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -24,17 +24,18 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   List<Widget> _items = [
     HomeFragment(),
-    Text("Second page"),
+    Categories(),
     Text("forth page"),
-    Text("fifth page")
   ];
   int _selectedState = 0;
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(""),backgroundColor: Colors.transparent,elevation: 0,
+      appBar: AppBar(
+        title: Text(""),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: IndexedStack(
         index: _selectedState,
@@ -44,11 +45,9 @@ class MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.add_to_home_screen), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Explore'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: 'Category'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favourite'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+              icon: Icon(Icons.favorite), label: 'Favourite')
         ],
         currentIndex: _selectedState,
         selectedItemColor: Colors.orange,
@@ -63,7 +62,4 @@ class MyHomePageState extends State<MyHomePage> {
     _selectedState = index;
     setState(() {});
   }
-
 }
-
-

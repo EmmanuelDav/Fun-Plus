@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fun_pluz/screens/more.dart';
 import '../utils/Data.dart';
 import '../utils/classes.dart';
 import '../main.dart';
@@ -11,7 +12,6 @@ class HomeFragment extends StatefulWidget {
 }
 
 class Home extends State<HomeFragment> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,38 +65,44 @@ class Home extends State<HomeFragment> {
           ),
           Container(
             height: 120,
-            child: Expanded(child: listItems()
-            ),
+            child: Expanded(child: listItems()),
           ),
           Container(
             margin: EdgeInsets.only(top: 30),
             child: Row(
               children: [
-                 Container(
-                   margin: EdgeInsets.all(10),
-                   child: Text("Our Service",
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Text("Our Service",
                       style: TextStyle(
                           fontFamily: 'Quicksand',
                           color: Colors.blue,
                           fontSize: 14)),
-                 ),
+                ),
                 Flexible(
-                   child: Container(
-                     alignment: Alignment.topRight,
-                     margin: EdgeInsets.all(10),
-                     child: Text("View more",
-                        style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            color: Colors.grey,
-                            fontSize: 12)),
-                   ),
+                  child: Container(
+                    alignment: Alignment.topRight,
+                    margin: EdgeInsets.all(10),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ViewMore()),
+                        );
+                      },
+                      child: Text("View more",
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              color: Colors.grey,
+                              fontSize: 12)),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
           Container(
-            child: Expanded(child: verticalList()
-            ),
+            child: Expanded(child: verticalList()),
           )
         ],
       ),
@@ -139,23 +145,32 @@ class Home extends State<HomeFragment> {
           );
         });
   }
-  Widget verticalList(){
-    return ListView.builder(itemCount: data.length, itemBuilder:(context, index) => MyExpandableWidget(data[index])
-    );
+
+  Widget verticalList() {
+    return ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) => MyExpandableWidget(data[index]));
   }
-  
 }
 
 class MyExpandableWidget extends StatelessWidget {
   final League league;
+
   MyExpandableWidget(this.league);
 
   @override
   Widget build(BuildContext context) {
-    if (league.listClubs.isEmpty) return ListTile(title: Text(league.leagueName));
-    return ExpansionTile(key: PageStorageKey<League>(league),
-      title: Text(league.leagueName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.pinkAccent)),
-      children: league.listClubs.map<Widget>((club) => showClubs(club)).toList(),
+    if (league.listClubs.isEmpty)
+      return ListTile(title: Text(league.leagueName));
+    return ExpansionTile(
+      key: PageStorageKey<League>(league),
+      title: Text(league.leagueName,
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.pinkAccent)),
+      children:
+          league.listClubs.map<Widget>((club) => showClubs(club)).toList(),
     );
   }
 }
@@ -163,8 +178,15 @@ class MyExpandableWidget extends StatelessWidget {
 showClubs(Club club) {
   return new ExpansionTile(
     key: PageStorageKey<Club>(club),
-    title: Text(club.clubName, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.purpleAccent),),
-    children: club.listPlayers.map<Widget>((player) => showPlayers(player)).toList(),
+    title: Text(
+      club.clubName,
+      style: TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.purpleAccent),
+    ),
+    children:
+        club.listPlayers.map<Widget>((player) => showPlayers(player)).toList(),
   );
 }
 
@@ -176,4 +198,3 @@ showPlayers(Player player) {
     ),
   );
 }
-

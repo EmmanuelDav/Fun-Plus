@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
-
 import '../main.dart';
 
 void main() => runApp(MyApp());
@@ -156,9 +155,10 @@ class MyHomePageState extends State<MyHomePage> {
                       child: _slideIndex == 3? ElevatedButton(
                         child: Text("Continue"),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  Home()),
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (BuildContext context) => Home()),
+                                  (Route<dynamic> route) => false
                           );
                         },
                         style: ElevatedButton.styleFrom(

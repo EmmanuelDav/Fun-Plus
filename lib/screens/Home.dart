@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:fun_pluz/screens/more.dart';
 import '../utils/Data.dart';
@@ -29,13 +28,12 @@ class Home extends State<HomeFragment> {
                           child: Text("Welcome Iyke",
                               style: TextStyle(
                                   fontFamily: 'Quicksand',
-                                  color: Colors.blue,
                                   fontSize: 17))),
                       Container(
                           child: Text("How can we help",
                               style: TextStyle(
                                   fontFamily: 'Quicksand',
-                                  color: Colors.grey,
+                               //   color: colorIncent,
                                   fontSize: 14)))
                     ],
                   ),
@@ -76,7 +74,6 @@ class Home extends State<HomeFragment> {
                   child: Text("Our Service",
                       style: TextStyle(
                           fontFamily: 'Quicksand',
-                          color: Colors.blue,
                           fontSize: 14)),
                 ),
                 Flexible(

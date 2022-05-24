@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:fun_pluz/screens/more.dart';
-import '../utils/Data.dart';
-import '../utils/classes.dart';
+import 'package:fun_pluz/Presenter/more.dart';
 import '../main.dart';
+import '../model/Data.dart';
+import '../model/classes.dart';
 
 class HomeFragment extends StatefulWidget {
   @override

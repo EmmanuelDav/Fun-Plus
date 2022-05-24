@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fun_pluz/screens/Home.dart';
-import 'package:fun_pluz/screens/categories.dart';
+
+import 'Presenter/Home.dart';
+import 'Presenter/categories.dart';
 
 const colorIncent = const Color(0xffF8ECD1); // Second `const` is optional in assignments.
 const colorPrimary = const Color(0xff85586F); // Second `const` is optional in assignments.

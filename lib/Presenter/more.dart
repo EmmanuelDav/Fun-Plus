@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../utils/Data.dart';
+import '../model/Data.dart';
 
 class More extends State<ViewMore> {
   @override

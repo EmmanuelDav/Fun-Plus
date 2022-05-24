@@ -13,7 +13,9 @@
     sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
   dependencies:
+    flutter_bloc: ^8.0.1
     http: ^0.13.4
+    equatable: ^2.0.3
     flutter:
       sdk: flutter
     transformer_page_view:

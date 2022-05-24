@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'Presenter/Home.dart';
 import 'Presenter/categories.dart';
+import 'Presenter/favourite.dart';
 
 const colorIncent = const Color(0xffF8ECD1); // Second `const` is optional in assignments.
 const colorPrimary = const Color(0xff85586F); // Second `const` is optional in assignments.
@@ -33,8 +34,8 @@ class MyHomePageState extends State<MyHomePage> {
   List<Widget> _items = [
     HomeFragment(),
     Categories(),
-    Text("forth page"),
-  ];
+    Favourite()
+ ];
   int _selectedState = 0;
 
 

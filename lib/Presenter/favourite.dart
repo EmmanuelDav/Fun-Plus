@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:fun_pluz/Presenter/splash_screen.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
 import '../model/classes.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
+
+class Favourite extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: RepositoryProvider(
+        create: (context) => JokeRepository(),
+        child: const MyApp(),
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => JokeBloc(
-        RepositoryProvider.of<JokeRepository>(context),
+        RepositoryProvider.of(context)
       )..add(LoadJokeEvent()),
       child: Scaffold(
         appBar: AppBar(

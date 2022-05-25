@@ -1,15 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fun_pluz/screens/Home.dart';
-import 'package:fun_pluz/screens/categories.dart';
+
+import 'Presenter/Home.dart';
+import 'Presenter/categories.dart';
+import 'Presenter/favourite.dart';
+
+const colorIncent = const Color(0xffF8ECD1); // Second `const` is optional in assignments.
+const colorPrimary = const Color(0xff85586F); // Second `const` is optional in assignments.
+
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        brightness: Brightness.light,
+        primaryColor: colorIncent,
+        fontFamily: 'Quicksand',
+
       ),
       home: MyHomePage(),
     );
@@ -25,21 +34,21 @@ class MyHomePageState extends State<MyHomePage> {
   List<Widget> _items = [
     HomeFragment(),
     Categories(),
-    Text("forth page"),
-  ];
+    Favourite()
+ ];
   int _selectedState = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(""),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: IndexedStack(
-        index: _selectedState,
-        children: _items,
+
+      body: Container(
+        margin: EdgeInsets.only(top: 65),
+        child: IndexedStack(
+          index: _selectedState,
+          children: _items,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -50,9 +59,9 @@ class MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.favorite), label: 'Favourite')
         ],
         currentIndex: _selectedState,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
-        elevation: 20,
+        selectedItemColor: colorPrimary,
+        unselectedItemColor: Colors.grey[300],
+        elevation: 10,
         onTap: _OnTap,
       ),
     );

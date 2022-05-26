@@ -5,8 +5,9 @@ class More extends State<ViewMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(""),backgroundColor: Colors.transparent,elevation: 0),
-    body: Column(
+      appBar: AppBar(
+          title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
+      body: Column(
         children: [
           Container(
             height: 100,
@@ -40,7 +41,7 @@ Widget HorizontalListView() {
         color: Colors.purple[600],
         child: const Center(
             child: Text(
-          'Pick_up Lines',
+          'Random',
           style: TextStyle(fontSize: 18, color: Colors.white),
         )),
       ),
@@ -49,7 +50,7 @@ Widget HorizontalListView() {
         color: Colors.purple[500],
         child: const Center(
             child: Text(
-          'Jokes',
+          'Music',
           style: TextStyle(fontSize: 18, color: Colors.white),
         )),
       ),
@@ -58,7 +59,7 @@ Widget HorizontalListView() {
         color: Colors.purple[400],
         child: const Center(
             child: Text(
-          'Mothers Joke',
+          'Programming',
           style: TextStyle(fontSize: 18, color: Colors.white),
         )),
       ),
@@ -67,7 +68,34 @@ Widget HorizontalListView() {
         color: Colors.purple[300],
         child: const Center(
             child: Text(
-          'Dirty Jokes',
+          'Dark',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        )),
+      ),
+      Container(
+        width: 200,
+        color: Colors.purple[300],
+        child: const Center(
+            child: Text(
+          'Pun',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        )),
+      ),
+      Container(
+        width: 200,
+        color: Colors.purple[300],
+        child: const Center(
+            child: Text(
+          'Spooky',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        )),
+      ),
+      Container(
+        width: 200,
+        color: Colors.purple[300],
+        child: const Center(
+            child: Text(
+          'Christmas',
           style: TextStyle(fontSize: 18, color: Colors.white),
         )),
       ),
@@ -81,16 +109,29 @@ Widget VerticalListView() {
     itemBuilder: (context, index) => Card(
       elevation: 6,
       margin: EdgeInsets.all(10),
-      child: ListTile(
-        leading: CircleAvatar(
-          child: Text(data[index].leagueName),
-          backgroundColor: Colors.purple,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ExpansionTile(
+              title: Text(
+                '',
+                textAlign: TextAlign.center,
+              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '',
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        title: Text(''),
-        subtitle:
-            Text(""),
-        trailing: Icon(Icons.add_a_photo),
-      ),
     ),
   );
 }

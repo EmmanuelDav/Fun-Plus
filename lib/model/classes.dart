@@ -46,9 +46,7 @@ class Jokes {
   }
 }
 
-JokeModel jokeModelFromJson(String str) => JokeModel.fromJson(json.decode(str));
 
-String jokeModelToJson(JokeModel data) => json.encode(data.toJson());
 
 class JokeModel {
   JokeModel({this.setup, this.delivery, this.id, this.category,});
@@ -59,27 +57,23 @@ class JokeModel {
   String category;
 
 
-  factory JokeModel.fromJson(Map<String, dynamic> json) => JokeModel(
+  factory JokeModel.fromMap(Map<String, dynamic> json) => JokeModel(
     setup: json["setup"] ?? json["joke"],
     delivery: json["delivery"] ?? "",
     category: json["category"] ?? "",
     id: json["id"],
   );
 
-  Map<String, dynamic> toJson() => {
-    "setup": setup,
-    "delivery": delivery,
-    "id": id,
-    "category":category,
-  };
 }
 class JokeRepository {
-  final String _baseUrl = "https://v2.jokeapi.dev/joke/Any";
+  final String _baseUrl = "https://v2.jokeapi.dev/joke/Any?amount=10";
 
-  Future<JokeModel> getJoke() async {
+  Future<List<JokeModel>> getJoke() async {
     final response = await http.get(Uri.parse(_baseUrl));
     if (response.statusCode == 200) {
-      return jokeModelFromJson(response.body);
+      return (json.decode(response.body)['jokes'] as List)
+          .map((e) => JokeModel.fromMap(e))
+          .toList();
     } else {
       throw Exception("Failed to load joke");
     }

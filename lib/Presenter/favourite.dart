@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_pluz/Presenter/splash_screen.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
@@ -10,8 +9,8 @@ import '../model/classes.dart';
 class Favourite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: RepositoryProvider(
+    return Scaffold(
+      body: RepositoryProvider(
         create: (context) => JokeRepository(),
         child: const MyApp(),
       ),
@@ -46,14 +45,14 @@ class MyApp extends StatelessWidget {
                   children: <Widget>[
                     ExpansionTile(
                       title: Text(
-                        state.joke.setup,
+                        state.joke[1].setup,
                         textAlign: TextAlign.center,
                       ),
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            state.joke.delivery,
+                            state.joke[1].delivery,
                             style: const TextStyle(
                               fontSize: 20,
                             ),

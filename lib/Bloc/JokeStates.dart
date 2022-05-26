@@ -13,7 +13,7 @@ class JokeLoadingState extends JokeState {
 }
 
 class JokeLoadedState extends JokeState {
-  final JokeModel joke;
+  final List<JokeModel> joke;
 
   JokeLoadedState(this.joke);
 

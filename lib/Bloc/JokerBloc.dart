@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../model/classes.dart';
@@ -13,7 +11,7 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
     on<LoadJokeEvent>((event, emit) async {
       emit(JokeLoadingState());
       try {
-        final joke = await _jokeRepository.getJoke();
+        final List<JokeModel> joke = (await _jokeRepository.getJoke());
         emit(JokeLoadedState(joke));
       } catch (e) {
         emit(JokeErrorState(e.toString()));

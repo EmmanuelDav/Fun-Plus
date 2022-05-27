@@ -5,48 +5,8 @@ import 'package:http/http.dart' as http;
 class CompanyStocks {
   String name;
   double price;
-
   CompanyStocks({this.name, this.price});
 }
-
-class League {
-  String leagueName;
-  List<Club> listClubs;
-
-  League(this.leagueName, this.listClubs);
-}
-
-class Club {
-  String clubName;
-  List<Player> listPlayers;
-
-  Club(this.clubName, this.listPlayers);
-}
-
-class Player {
-  String playerName;
-
-  Player(this.playerName);
-}
-
-class Jokes {
-  int category;
-  String type;
-  String setup;
-  String delivery;
-
-  Jokes({this.category, this.type, this.setup, this.delivery});
-
-  factory Jokes.fromJson(Map<String, dynamic> json) {
-    return Jokes(
-        category: json['category'],
-        type: json['type'],
-        setup: json['setup'],
-        delivery: json['delivery']);
-  }
-}
-
-
 
 class JokeModel {
   JokeModel({this.setup, this.delivery, this.id, this.category,});

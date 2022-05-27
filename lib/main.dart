@@ -6,8 +6,10 @@ import 'Presenter/Home.dart';
 import 'Presenter/categories.dart';
 import 'Presenter/favourite.dart';
 
-const colorIncent = const Color(0xffF8ECD1); // Second `const` is optional in assignments.
-const colorPrimary = const Color(0xff85586F); // Second `const` is optional in assignments.
+const colorIncent = const Color(0xffE8F1F5); // Second `const` is optional in assignments.
+const colorPrimary = const Color(0xff005691); // Second `const` is optional in assignments.
+const colorMain = const Color(0xff004A7C); // Second `const` is optional in assignments.
+const colorP = const Color(0xffFAFAFA); // Second `const` is optional in assignments.
 
 
 class Home extends StatelessWidget {
@@ -53,7 +55,7 @@ class MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_to_home_screen), label: 'Home'),
+              icon: Icon(Icons.house), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Explore'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Favourite')

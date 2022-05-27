@@ -105,7 +105,7 @@ Widget HorizontalListView() {
 
 Widget VerticalListView() {
   return ListView.builder(
-    itemCount: data.length,
+    itemCount: 10,
     itemBuilder: (context, index) => Card(
       elevation: 6,
       margin: EdgeInsets.all(10),

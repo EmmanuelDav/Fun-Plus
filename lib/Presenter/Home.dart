@@ -1,109 +1,128 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_pluz/Presenter/more.dart';
-import '../main.dart';
+import 'package:fun_pluz/main.dart';
+import '../Bloc/JokeEvent.dart';
+import '../Bloc/JokeStates.dart';
+import '../Bloc/JokerBloc.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
 
-class HomeFragment extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => Home();
-}
 
-class Home extends State<HomeFragment> {
+class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(15),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: Text("Welcome Iyke",
-                              style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontSize: 17))),
-                      Container(
-                          child: Text("How can we help",
-                              style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                               //   color: colorIncent,
-                                  fontSize: 14)))
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Container(
-                      alignment: Alignment.topRight,
-                      margin: EdgeInsets.only(top: 5, right: 20),
-                      child: Icon(
-                        Icons.account_circle,
-                        size: 40,
-                      )),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(15),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-              ),
-            ),
-          ),
-          Container(
-            height: 120,
-            child: Expanded(child: listItems()),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: Text("Our Service",
-                      style: TextStyle(
-                          fontFamily: 'Quicksand',
-                          fontSize: 14)),
-                ),
-                Flexible(
-                  child: Container(
-                    alignment: Alignment.topRight,
-                    margin: EdgeInsets.all(10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ViewMore()),
-                        );
-                      },
-                      child: Text("View more",
-                          style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              color: Colors.grey,
-                              fontSize: 12)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Expanded(child: verticalList()),
-          )
-        ],
+      body: RepositoryProvider(
+        create: (context) => JokeRepository(),
+        child: Home(),
       ),
     );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) =>
+        JokeBloc(
+            RepositoryProvider.of(context)
+        )
+          ..add(LoadJokeEvent()),
+        child: Scaffold(
+          body: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.all(15),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              child: Text("Welcome Iyke",
+                                  style: TextStyle(
+                                      fontFamily: 'Quicksand',
+                                      fontSize: 17))),
+                          Container(
+                              child: Text("How can we help",
+                                  style: TextStyle(
+                                      fontFamily: 'Quicksand',
+                                      //   color: colorIncent,
+                                      fontSize: 14)))
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                          alignment: Alignment.topRight,
+                          margin: EdgeInsets.only(top: 5, right: 20),
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 40,
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(15),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Search',
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                ),
+              ),
+              Container(
+                height: 120,
+                child: Expanded(child: listItems()),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Text("Our Service",
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontSize: 14)),
+                    ),
+                    Flexible(
+                      child: Container(
+                        alignment: Alignment.topRight,
+                        margin: EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewMore()),
+                            );
+                          },
+                          child: Text("View more",
+                              style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  color: Colors.grey,
+                                  fontSize: 12)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Expanded(child: checkingState()),
+              )
+            ],
+          ),
+        ));
   }
 
   Widget listItems() {
@@ -115,25 +134,19 @@ class Home extends State<HomeFragment> {
           return Container(
             height: 100,
             child: Card(
+              color: colorPrimary,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        child: Text(
-                          stocksList[index].name,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                      ),
                       Text(
                         stocksList[index].name,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20,color: colorP
                         ),
                       ),
-                      Text("\$ ${stocksList[index].price}"),
+                      Text("\$ ${stocksList[index].price}",style: TextStyle(color: colorP),),
                     ],
                   ),
                 ),
@@ -142,56 +155,62 @@ class Home extends State<HomeFragment> {
           );
         });
   }
-
-  Widget verticalList() {
-    return ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) => MyExpandableWidget(data[index]));
+  Widget checkingState() {
+   return BlocBuilder<JokeBloc, JokeState>(
+      builder: (context, state) {
+        if (state is JokeLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is JokeLoadedState) {
+          return ListView.builder(
+              itemCount: state.joke.length,
+              itemBuilder: (context, index) => MyExpandableWidget(state.joke[index]));
+        }
+        if (state is JokeErrorState) {
+          return Center(
+            child: Text(state.error.toString()),
+          );
+        }
+        return Container();
+      },
+    );
   }
+
 }
 
-class MyExpandableWidget extends StatelessWidget {
-  final League league;
+class MyExpandableWidget extends StatelessWidget{
+  final JokeModel model;
 
-  MyExpandableWidget(this.league);
+  MyExpandableWidget(this.model);
 
   @override
   Widget build(BuildContext context) {
-    if (league.listClubs.isEmpty)
-      return ListTile(title: Text(league.leagueName));
-    return ExpansionTile(
-      key: PageStorageKey<League>(league),
-      title: Text(league.leagueName,
-          style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Colors.pinkAccent)),
-      children:
-          league.listClubs.map<Widget>((club) => showClubs(club)).toList(),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ExpansionTile(
+          title: Text( model.setup, style: TextStyle(fontSize: 20),
+            textAlign: TextAlign.start,
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                model.delivery,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-showClubs(Club club) {
-  return new ExpansionTile(
-    key: PageStorageKey<Club>(club),
-    title: Text(
-      club.clubName,
-      style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.purpleAccent),
-    ),
-    children:
-        club.listPlayers.map<Widget>((player) => showPlayers(player)).toList(),
-  );
-}
 
-showPlayers(Player player) {
-  return new ListTile(
-    title: new Text(
-      player.playerName,
-      style: new TextStyle(fontSize: 20),
-    ),
-  );
-}
+

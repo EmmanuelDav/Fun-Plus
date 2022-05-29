@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
         JokeBloc(
             RepositoryProvider.of(context)
         )
-          ..add(LoadJokeEvent()),
+          ..add(LoadJokeEvent('Any')),
         child: Scaffold(
           body: Column(
             children: [

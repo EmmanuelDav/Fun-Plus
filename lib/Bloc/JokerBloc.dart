@@ -11,7 +11,7 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
     on<LoadJokeEvent>((event, emit) async {
       emit(JokeLoadingState());
       try {
-        final List<JokeModel> joke = (await _jokeRepository.getJoke());
+        final List<JokeModel> joke = (await _jokeRepository.getJoke(event.category));
         emit(JokeLoadedState(joke));
       } catch (e) {
         emit(JokeErrorState(e.toString()));

@@ -26,10 +26,8 @@ class JokeModel {
 
 }
 class JokeRepository {
-  final String _baseUrl = "https://v2.jokeapi.dev/joke/Any?amount=10";
-
-  Future<List<JokeModel>> getJoke() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+  Future<List<JokeModel>> getJoke(String category) async {
+    final response = await http.get(Uri.parse("https://v2.jokeapi.dev/joke/$category?amount=10"));
     if (response.statusCode == 200) {
       return (json.decode(response.body)['jokes'] as List)
           .map((e) => JokeModel.fromMap(e))

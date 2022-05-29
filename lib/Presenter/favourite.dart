@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => JokeBloc(
         RepositoryProvider.of(context)
-      )..add(LoadJokeEvent()),
+      )..add(LoadJokeEvent('Any')),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Random Jokes'),
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<JokeBloc>(context).add(LoadJokeEvent());
+                        BlocProvider.of<JokeBloc>(context).add(LoadJokeEvent('any'));
                       },
                       child: const Text('Load New Joke'),
                     ),

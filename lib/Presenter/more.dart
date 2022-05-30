@@ -4,7 +4,6 @@ import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
 import '../model/classes.dart';
-import 'dart:developer';
 
 class ViewMore extends StatefulWidget {
   @override
@@ -12,6 +11,7 @@ class ViewMore extends StatefulWidget {
 }
 
 class More extends State<ViewMore> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,100 +20,15 @@ class More extends State<ViewMore> {
         body: RepositoryProvider(
           create: (context) => JokeRepository(),
           child: Scaffold(
-              body: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    child: Expanded(
-                      child: HorizontalListView(),
-                    ),
-                  ),
-                  Container(
-                    child: Expanded(
-                      child: checkingState(),
-                    ),
-                  )
-                ],
-              )),
+              body:LoadJokes()),
         ));
   }
 
-  Widget HorizontalListView() {
-    return ListView(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      children: <Widget>[
-        Container(
-          width: 200,
-          color: Colors.purple[600],
-          child: const Center(
-              child: Text(
-            'Random',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[500],
-          child: const Center(
-              child: Text(
-            'Music',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[400],
-          child: const Center(
-              child: Text(
-            'Programming',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[300],
-          child: const Center(
-              child: Text(
-            'Dark',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[300],
-          child: const Center(
-              child: Text(
-            'Pun',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[300],
-          child: const Center(
-              child: Text(
-            'Spooky',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-        Container(
-          width: 200,
-          color: Colors.purple[300],
-          child: const Center(
-              child: Text(
-            'Christmas',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-      ],
-    );
-  }
-
-  Widget checkingState() {
+  Widget LoadJokes() {
     return BlocProvider(
         create: (context) =>
-            JokeBloc(RepositoryProvider.of(context))..add(LoadJokeEvent('Any')),
+        JokeBloc(RepositoryProvider.of(context))
+          ..add(LoadJokeEvent('Any')),
         child: BlocBuilder<JokeBloc, JokeState>(
           builder: (context, state) {
             if (state is JokeLoadingState) {
@@ -124,12 +39,137 @@ class More extends State<ViewMore> {
             if (state is JokeLoadedState) {
               return RefreshIndicator(
                   onRefresh: () async {
-                    BlocProvider.of<JokeBloc>(context).add(LoadJokeEvent('any'));
+                    BlocProvider.of<JokeBloc>(context).add(
+                        LoadJokeEvent('any'));
                   },
-                  child:ListView.builder(
-                  itemCount: state.joke.length,
-                  itemBuilder: (mContext, index) =>
-                      MyExpandableWidget(state.joke[index])));
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        child: Expanded(
+                          child: ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: () async{
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('any'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[600],
+                                  child: const Center(
+                                      child: Text(
+                                        'Random',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async{
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Music'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[500],
+                                  child: const Center(
+                                      child: Text(
+                                        'Music',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async{
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Programming'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[400],
+                                  child: const Center(
+                                      child: Text(
+                                        'Programming',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async{
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Dark'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[300],
+                                  child: const Center(
+                                      child: Text(
+                                        'Dark',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Pun'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[300],
+                                  child: const Center(
+                                      child: Text(
+                                        'Pun',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Spooky'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[300],
+                                  child: const Center(
+                                      child: Text(
+                                        'Spooky',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  BlocProvider.of<JokeBloc>(context).add(
+                                      LoadJokeEvent('Christmas'));
+                                },
+                                child: Container(
+                                  width: 200,
+                                  color: Colors.purple[300],
+                                  child: const Center(
+                                      child: Text(
+                                        'Christmas',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Expanded(
+                          child: ListView.builder(
+                              itemCount: state.joke.length,
+                              itemBuilder: (mContext, index) =>
+                                  MyExpandableWidget(state.joke[index])),
+                        ),
+                      ),
+                    ],
+                  ));
             }
             if (state is JokeErrorState) {
               return Center(

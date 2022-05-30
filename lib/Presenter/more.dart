@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
-import '../model/Data.dart';
 import '../model/classes.dart';
+import 'dart:developer';
 
 class ViewMore extends StatefulWidget {
   @override
@@ -15,33 +15,27 @@ class More extends State<ViewMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
-      body: Scaffold(
-          body: RefreshIndicator(
-        onRefresh: () {
-          BlocProvider.of<JokeBloc>(context).add(LoadJokeEvent('programming'));
-        },
-        child: Column(
-          children: [
-            Container(
-              height: 100,
-              child: Expanded(
-                child: HorizontalListView(),
-              ),
-            ),
-            Container(
-              child: Expanded(
-                child: RepositoryProvider(
-                  create: (context) => JokeRepository(),
-                  child: checkingState(),
-                ),
-              ),
-            )
-          ],
-        ),
-      )),
-    );
+        appBar: AppBar(
+            title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
+        body: RepositoryProvider(
+          create: (context) => JokeRepository(),
+          child: Scaffold(
+              body: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    child: Expanded(
+                      child: HorizontalListView(),
+                    ),
+                  ),
+                  Container(
+                    child: Expanded(
+                      child: checkingState(),
+                    ),
+                  )
+                ],
+              )),
+        ));
   }
 
   Widget HorizontalListView() {
@@ -128,10 +122,14 @@ class More extends State<ViewMore> {
               );
             }
             if (state is JokeLoadedState) {
-              return ListView.builder(
+              return RefreshIndicator(
+                  onRefresh: () async {
+                    BlocProvider.of<JokeBloc>(context).add(LoadJokeEvent('any'));
+                  },
+                  child:ListView.builder(
                   itemCount: state.joke.length,
-                  itemBuilder: (context, index) =>
-                      MyExpandableWidget(state.joke[index]));
+                  itemBuilder: (mContext, index) =>
+                      MyExpandableWidget(state.joke[index])));
             }
             if (state is JokeErrorState) {
               return Center(

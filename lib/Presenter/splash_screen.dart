@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
+import '../constants.dart';
 import '../main.dart';
+import '../model/classes.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,238 +14,212 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
+        fontFamily: 'Lato',
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: OnboardScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  final String title;
-
-  MyHomePage({this.title});
+class OnboardScreen extends StatefulWidget {
+  OnboardScreen({Key key}) : super(key: key);
 
   @override
-  MyHomePageState createState() {
-    return new MyHomePageState();
-  }
+  State<OnboardScreen> createState() => _OnboardScreenState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
-  int _slideIndex = 0;
-  final List<String> images = [
-    "assets/slide_1.png",
-    "assets/slide_2.png",
-    "assets/slide_3.png",
-    "assets/slide_4.png"
+class _OnboardScreenState extends State<OnboardScreen> {
+  int currentIndex = 0;
+
+  List<OnBoardModel> allOnBoardScreen = [
+    OnBoardModel(
+        "assets/slide_1.png",
+        "There are many variations of passages of Lorem Ipsum available. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary",
+        "Prepard by exparts"),
+    OnBoardModel(
+        "assets/slide_2.png",
+        "There are many variations of passages of Lorem Ipsum available. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary",
+        "Delivery to your home"),
+    OnBoardModel(
+        "assets/slide_3.png",
+        "There are many variations of passages of Lorem Ipsum available. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary",
+        "Enjoy with everyone"),
   ];
-
-  List<Color> colors = [Colors.orange];
-
-  final List<String> text0 = [
-    "Welcome in your app",
-    "Enjoy teaching...",
-    "Showcase your skills",
-    "Friendship is great"
-  ];
-
-  final List<String> text1 = [
-    "App for food lovers, satisfy your taste",
-    "Find best meals in your area, simply",
-    "Have fun while eating your relatives and more",
-    "Meet new friends from all over the world"
-  ];
-
-  final IndexController controller = IndexController();
 
   @override
   Widget build(BuildContext context) {
-    TransformerPageView transformerPageView = TransformerPageView(
-        pageSnapping: true,
-        onPageChanged: (index) {
-          setState(() {
-            this._slideIndex = index;
-          });
-        },
-        loop: false,
-        controller: controller,
-        transformer: new PageTransformerBuilder(
-            builder: (Widget child, TransformInfo info) {
-          return new Material(
-            color: Colors.white,
-            elevation: 8.0,
-            textStyle: new TextStyle(color: Colors.white),
-            borderRadius: new BorderRadius.circular(12.0),
-            child: new Container(
-              alignment: Alignment.center,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new ParallaxContainer(
-                      child: new Text(
-                        text0[info.index],
-                        style: new TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 34.0,
-                            fontFamily: 'Quicksand',
-                            fontWeight: FontWeight.bold),
-                      ),
-                      position: info.position,
-                      opacityFactor: .8,
-                      translationFactor: 400.0,
-                    ),
-                    SizedBox(
-                      height: 45.0,
-                    ),
-                    new ParallaxContainer(
-                      child: new Image.asset(
-                        images[info.index],
-                        fit: BoxFit.contain,
-                        height: 350,
-                      ),
-                      position: info.position,
-                      translationFactor: 400.0,
-                    ),
-                    SizedBox(
-                      height: 45.0,
-                    ),
-                    new ParallaxContainer(
-                      child: new Text(
-                        text1[info.index],
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 28.0,
-                            fontFamily: 'Quicksand',
-                            fontWeight: FontWeight.bold),
-                      ),
-                      position: info.position,
-                      translationFactor: 300.0,
-                    ),
-                    SizedBox(
-                      height: 55.0,
-                    ),
-                    new ParallaxContainer(
-                      position: info.position,
-                      translationFactor: 500.0,
-                      child: Dots(
-                        controller: controller,
-                        slideIndex: _slideIndex,
-                        numberOfDots: images.length,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 55.0,
-                    ),
-                    Container (
-                      margin: EdgeInsets.all(10),
-                      alignment: Alignment.centerRight,
-                      child: _slideIndex == 3? ElevatedButton(
-                        child: Text("Continue"),
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (BuildContext context) => Home()),
-                                  (Route<dynamic> route) => false
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.orange,
-                            textStyle: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
-                      ): null,
-                    )
-                  ],
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Food Express",
+          style: TextStyle(color: GreyMini),
+        ),
+        backgroundColor: PrimaryScreen,
+      ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          PageView.builder(
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+              itemCount: allOnBoardScreen.length,
+              itemBuilder: (context, index) {
+                return PageBuilderWidget(
+                    title: allOnBoardScreen[index].titlestr,
+                    description: allOnBoardScreen[index].description,
+                    imgurl: allOnBoardScreen[index].imgStr);
+              }),
+          Positioned(
+            bottom: MediaQuery
+                .of(context)
+                .size
+                .height * 0.3,
+            left: MediaQuery
+                .of(context)
+                .size
+                .width * 0.44,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                allOnBoardScreen.length,
+                    (index) => buildDot(index: index),
               ),
             ),
-          );
-        }),
-        itemCount: 4);
+          ),
+          currentIndex < allOnBoardScreen.length - 1
+              ? Positioned(
+            bottom: MediaQuery
+                .of(context)
+                .size
+                .height * 0.2,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Previous",
+                    style: TextStyle(fontSize: 18, color: GreyMini),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: GreyMiniBold,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0))),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Next",
+                    style: TextStyle(fontSize: 18, color: GreyMini),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: GreyMiniBold,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            bottomLeft: Radius.circular(20.0))),
+                  ),
+                )
+              ],
+            ),
+          )
+              : Positioned(
+            bottom: MediaQuery
+                .of(context)
+                .size
+                .height * 0.2,
+            left: MediaQuery
+                .of(context)
+                .size
+                .width * 0.33,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "Get Started",
+                style: TextStyle(fontSize: 18, color: GreyMini),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: GreyMiniBold,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: transformerPageView,
+  AnimatedContainer buildDot({int index}) {
+    return AnimatedContainer(
+      duration: kAnimationDuration,
+      margin: EdgeInsets.only(right: 5),
+      height: 6,
+      width: currentIndex == index ? 20 : 6,
+      decoration: BoxDecoration(
+        color: currentIndex == index ? GreyBold : Color(0xFFD8D8D8),
+        borderRadius: BorderRadius.circular(3),
+      ),
     );
   }
 }
 
-class Dots extends StatelessWidget {
-  final IndexController controller;
-  final int slideIndex;
-  final int numberOfDots;
+class PageBuilderWidget extends StatelessWidget {
+  String title;
+  String description;
+  String imgurl;
 
-  Dots({this.controller, this.slideIndex, this.numberOfDots});
-
-  List<Widget> _generateDots() {
-    List<Widget> dots = [];
-    for (int i = 0; i < numberOfDots; i++) {
-      dots.add(i == slideIndex ? _activeSlide(i) : _inactiveSlide(i));
-    }
-    return dots;
-  }
-
-  Widget _activeSlide(int index) {
-    return GestureDetector(
-      onTap: () {
-        print('Tapped');
-      },
-      child: new Container(
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Container(
-            width: 20.0,
-            height: 20.0,
-            decoration: BoxDecoration(
-              color: Colors.orangeAccent.withOpacity(.3),
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _inactiveSlide(int index) {
-    return GestureDetector(
-      onTap: () {
-        controller.move(index);
-      },
-      child: new Container(
-        child: Padding(
-          padding: EdgeInsets.only(left: 5.0, right: 5.0),
-          child: Container(
-            width: 14.0,
-            height: 14.0,
-            decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(50.0)),
-          ),
-        ),
-      ),
-    );
-  }
+  PageBuilderWidget({Key key,
+    this.title,
+    this.description,
+    this.imgurl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: _generateDots(),
-    ));
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 20),
+            child: Image.asset(imgurl),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          //Tite Text
+          Text(title,
+              style: TextStyle(
+                  color: GreyMini,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700)),
+          const SizedBox(
+            height: 20,
+          ),
+          //discription
+          Text(description,
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                color: GreyMini,
+                fontSize: 14,
+              ))
+        ],
+      ),
+    );
   }
 }
+

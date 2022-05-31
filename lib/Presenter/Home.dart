@@ -5,6 +5,7 @@ import 'package:fun_pluz/main.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
+import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
 
@@ -134,7 +135,7 @@ class Home extends StatelessWidget {
           return Container(
             height: 100,
             child: Card(
-              color: colorPrimary,
+              color: PrimaryScreen,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
@@ -143,10 +144,10 @@ class Home extends StatelessWidget {
                       Text(
                         stocksList[index].name,
                         style: TextStyle(
-                          fontSize: 20,color: colorP
+                          fontSize: 20,color: GreyMini
                         ),
                       ),
-                      Text("\$ ${stocksList[index].price}",style: TextStyle(color: colorP),),
+                      Text("\$ ${stocksList[index].price}",style: TextStyle(color: GreyMini),),
                     ],
                   ),
                 ),

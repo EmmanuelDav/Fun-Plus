@@ -49,9 +49,7 @@ class Home extends StatelessWidget {
                                       fontSize: 17))),
                           Container(
                               child: Text("How can we help",
-                                  style: TextStyle(
-                                      fontFamily: 'Quicksand',
-                                      //   color: colorIncent,
+                                  style: GoogleFonts.getFont('Quicksand',
                                       fontSize: 14)))
                         ],
                       ),

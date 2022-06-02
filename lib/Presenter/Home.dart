@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_pluz/Presenter/more.dart';
-import 'package:fun_pluz/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
@@ -45,8 +45,7 @@ class Home extends StatelessWidget {
                           Container(
                               margin: EdgeInsets.only(bottom: 10),
                               child: Text("Welcome Iyke",
-                                  style: TextStyle(
-                                      fontFamily: 'Quicksand',
+                                  style: GoogleFonts.getFont('Poppins',
                                       fontSize: 17))),
                           Container(
                               child: Text("How can we help",
@@ -90,10 +89,9 @@ class Home extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.all(10),
-                      child: Text("Our Service",
+                      child: Text("Popular",
                           style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              fontSize: 14)),
+                              fontSize: 15)),
                     ),
                     Flexible(
                       child: Container(
@@ -107,11 +105,11 @@ class Home extends StatelessWidget {
                                   builder: (context) => ViewMore()),
                             );
                           },
-                          child: Text("View more",
-                              style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.grey,
-                                  fontSize: 12)),
+                          child: Text("view more",
+                              style: GoogleFonts.getFont('Poppins',
+                                  color: GreyBold,
+                                  fontWeight: FontWeight. bold,
+                                  fontSize: 14)),
                         ),
                       ),
                     ),
@@ -144,7 +142,7 @@ class Home extends StatelessWidget {
                       Text(
                         stocksList[index].name,
                         style: TextStyle(
-                          fontSize: 20,color: GreyMini
+                          fontSize: 20,color: GreyBold
                         ),
                       ),
                       Text("\$ ${stocksList[index].price}",style: TextStyle(color: GreyMini),),
@@ -178,7 +176,6 @@ class Home extends StatelessWidget {
       },
     );
   }
-
 }
 
 class MyExpandableWidget extends StatelessWidget{

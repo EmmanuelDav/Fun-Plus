@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         fontFamily: 'Lato',
       ),
       home: OnboardScreen(),
@@ -54,7 +53,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
         centerTitle: true,
         title: Text(
           "Food Express",
-          style: TextStyle(color: GreyMini),
+          style: TextStyle(color: GreyMiniBold),
         ),
         backgroundColor: PrimaryScreen,
       ),
@@ -111,7 +110,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     style: TextStyle(fontSize: 18, color: GreyMini),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: GreyMiniBold,
+                    primary: GreyBold,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(20.0),
@@ -125,7 +124,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     style: TextStyle(fontSize: 18, color: GreyMini),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: GreyMiniBold,
+                    primary: GreyBold,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.0),
@@ -145,13 +144,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 .size
                 .width * 0.33,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage())),
               child: Text(
                 "Get Started",
                 style: TextStyle(fontSize: 18, color: GreyMini),
               ),
               style: ElevatedButton.styleFrom(
-                primary: GreyMiniBold,
+                primary: GreyBold,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
               ),
@@ -169,7 +168,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
       height: 6,
       width: currentIndex == index ? 20 : 6,
       decoration: BoxDecoration(
-        color: currentIndex == index ? GreyBold : Color(0xFFD8D8D8),
+        color: currentIndex == index ? GreyMiniBold : Color(0xFFD8D8D8),
         borderRadius: BorderRadius.circular(3),
       ),
     );
@@ -204,7 +203,7 @@ class PageBuilderWidget extends StatelessWidget {
           //Tite Text
           Text(title,
               style: TextStyle(
-                  color: GreyMini,
+                  color: GreyMiniBold,
                   fontSize: 24,
                   fontWeight: FontWeight.w700)),
           const SizedBox(
@@ -214,7 +213,7 @@ class PageBuilderWidget extends StatelessWidget {
           Text(description,
               textAlign: TextAlign.justify,
               style: TextStyle(
-                color: GreyMini,
+                color: GreyMiniBold,
                 fontSize: 14,
               ))
         ],

@@ -56,7 +56,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
         centerTitle: true,
         title: Text(
           "Food Express",
-          style: TextStyle(color: CustomColors.GreyMiniBold),
+          style: TextStyle(color: CustomColors.GreyMini),
         ),
         backgroundColor: CustomColors.PrimaryScreen,
       ),

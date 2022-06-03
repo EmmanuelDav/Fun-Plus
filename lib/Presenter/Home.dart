@@ -9,7 +9,6 @@ import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
 
-
 class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,16 +21,12 @@ class HomeFragment extends StatelessWidget {
   }
 }
 
-
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-        JokeBloc(
-            RepositoryProvider.of(context)
-        )
-          ..add(LoadJokeEvent('Any')),
+            JokeBloc(RepositoryProvider.of(context))..add(LoadJokeEvent('Any')),
         child: Scaffold(
           body: Column(
             children: [
@@ -46,11 +41,13 @@ class Home extends StatelessWidget {
                               margin: EdgeInsets.only(bottom: 10),
                               child: Text("Welcome",
                                   style: GoogleFonts.getFont('Poppins',
-                                      fontSize: 30,fontWeight: FontWeight.bold))),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold))),
                           Container(
                               child: Text("Jokes are gate ways to the soul",
                                   style: GoogleFonts.getFont('Quicksand',
-                                      fontSize: 14,fontWeight: FontWeight.bold)))
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold)))
                         ],
                       ),
                     ),
@@ -58,7 +55,7 @@ class Home extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 250,
+                height: 200,
                 child: Expanded(child: listItems()),
               ),
               Container(
@@ -67,16 +64,16 @@ class Home extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.all(10),
-                      child: Text("Popular",
-                          style: TextStyle(
-                              fontSize: 20)),
+                      child: Text("Popular", style: TextStyle(fontSize: 20)),
                     ),
                     Flexible(
                       child: Container(
                         alignment: Alignment.topRight,
                         margin: EdgeInsets.all(10),
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(            primary: Colors.transparent,),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent,
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -84,15 +81,15 @@ class Home extends StatelessWidget {
                                   builder: (context) => ViewMore()),
                             );
                           },
-                          
-                          child:  Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text('More'), // <-- Text
                               SizedBox(
                                 width: 5,
                               ),
-                              Icon( // <-- Icon
+                              Icon(
+                                // <-- Icon
                                 Icons.play_arrow_rounded,
                                 size: 24.0,
                               ),
@@ -120,14 +117,19 @@ class Home extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             child: Card(
-              color: CustomColors.PrimaryScreen,
+              color: CustomColors.Yellow,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Column(
                     children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                          child: Text(
+                        stocksList[index].category,
+                        style: TextStyle(color: CustomColors.GreyMini),
+                      )),
                       Image.asset(stocksList[index].Image),
-                      Text(stocksList[index].category,style: TextStyle(color: CustomColors.GreyMini),),
                     ],
                   ),
                 ),
@@ -136,8 +138,9 @@ class Home extends StatelessWidget {
           );
         });
   }
+
   Widget checkingState() {
-   return BlocBuilder<JokeBloc, JokeState>(
+    return BlocBuilder<JokeBloc, JokeState>(
       builder: (context, state) {
         if (state is JokeLoadingState) {
           return const Center(
@@ -147,7 +150,8 @@ class Home extends StatelessWidget {
         if (state is JokeLoadedState) {
           return ListView.builder(
               itemCount: state.joke.length,
-              itemBuilder: (context, index) => MyExpandableWidget(state.joke[index]));
+              itemBuilder: (context, index) =>
+                  MyExpandableWidget(state.joke[index]));
         }
         if (state is JokeErrorState) {
           return Center(
@@ -160,7 +164,7 @@ class Home extends StatelessWidget {
   }
 }
 
-class MyExpandableWidget extends StatelessWidget{
+class MyExpandableWidget extends StatelessWidget {
   final JokeModel model;
 
   MyExpandableWidget(this.model);
@@ -168,10 +172,13 @@ class MyExpandableWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: CustomColors.DeepGreen,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ExpansionTile(
-          title: Text( model.setup, style: TextStyle(fontSize: 20),
+          title: Text(
+            model.setup,
+            style: TextStyle(fontSize: 20),
             textAlign: TextAlign.start,
           ),
           children: [
@@ -191,6 +198,3 @@ class MyExpandableWidget extends StatelessWidget{
     );
   }
 }
-
-
-

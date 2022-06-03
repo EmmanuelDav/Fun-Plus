@@ -17,6 +17,10 @@
     http: ^0.13.4
     equatable: ^2.0.3
     cupertino_icons: ^1.0.2
+    shared_preferences: ^0.5.10
+    provider: ^4.3.2+2
+
+
 
     google_fonts: ^2.1.0
     flutter:

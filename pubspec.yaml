@@ -48,6 +48,13 @@
       - assets/slide_2.png
       - assets/slide_3.png
       - assets/slide_4.png
+      - assets/Images/christmas.png
+      - assets/Images/code.png
+      - assets/Images/dark.png
+      - assets/Images/ghost.png
+      - assets/Images/musical.png
+      - assets/Images/pun.png
+      - assets/Images/random.png
     #  - images/a_dot_ham.jpeg
 
     # An image asset can refer to one or more resolution-specific "variants", see
@@ -61,15 +68,15 @@
     # "family" key with the font family name, and a "fonts" key with a
     # list giving the asset and other descriptors for the font. For
     # example:
-    fonts:
-      - family: Lato
-        fonts:
-          - asset: assets/Lato-Bold.ttf
-          - asset: assets/Lato-Light.ttf
-          - asset: assets/Lato-Regular.ttf
-          - asset: assets/Lato-Thin.ttf
-            weight: 400
-    #       - asset: fonts/Schyler-Italic.ttf
+#    fonts:
+#      - family: Lato
+#        fonts:
+#          - asset: assets/Lato-Bold.ttf
+#          - asset: assets/Lato-Light.ttf
+#          - asset: assets/Lato-Regular.ttf
+#          - asset: assets/Lato-Thin.ttf
+#            weight: 400
+#    #       - asset: fonts/Schyler-Italic.ttf
     #         style: italic
     #   - family: Trajan Pro
     #     fonts:

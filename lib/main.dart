@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.favorite), label: 'Favourite')
         ],
         currentIndex: _selectedState,
-        selectedItemColor: GreyBold,
+        selectedItemColor: CustomColors.GreyBold,
         unselectedItemColor: Colors.grey[300],
         elevation: 10,
         onTap: _OnTap,

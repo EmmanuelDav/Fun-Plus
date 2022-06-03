@@ -44,41 +44,21 @@ class Home extends StatelessWidget {
                         children: [
                           Container(
                               margin: EdgeInsets.only(bottom: 10),
-                              child: Text("Welcome Iyke",
+                              child: Text("Welcome",
                                   style: GoogleFonts.getFont('Poppins',
-                                      fontSize: 17))),
+                                      fontSize: 30,fontWeight: FontWeight.bold))),
                           Container(
-                              child: Text("How can we help",
+                              child: Text("Jokes are gate ways to the soul",
                                   style: GoogleFonts.getFont('Quicksand',
-                                      fontSize: 14)))
+                                      fontSize: 14,fontWeight: FontWeight.bold)))
                         ],
                       ),
-                    ),
-                    Flexible(
-                      child: Container(
-                          alignment: Alignment.topRight,
-                          margin: EdgeInsets.only(top: 5, right: 20),
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 40,
-                          )),
                     ),
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(15),
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Search',
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-              Container(
-                height: 120,
+                height: 250,
                 child: Expanded(child: listItems()),
               ),
               Container(
@@ -89,25 +69,35 @@ class Home extends StatelessWidget {
                       margin: EdgeInsets.all(10),
                       child: Text("Popular",
                           style: TextStyle(
-                              fontSize: 15)),
+                              fontSize: 20)),
                     ),
                     Flexible(
                       child: Container(
                         alignment: Alignment.topRight,
                         margin: EdgeInsets.all(10),
-                        child: GestureDetector(
-                          onTap: () {
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(            primary: Colors.transparent,),
+                          onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ViewMore()),
                             );
                           },
-                          child: Text("view more",
-                              style: GoogleFonts.getFont('Poppins',
-                                  color: GreyBold,
-                                  fontWeight: FontWeight. bold,
-                                  fontSize: 14)),
+                          
+                          child:  Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('More'), // <-- Text
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon( // <-- Icon
+                                Icons.play_arrow_rounded,
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -129,21 +119,15 @@ class Home extends StatelessWidget {
         itemCount: stocksList == 0 ? null : stocksList.length,
         itemBuilder: (context, index) {
           return Container(
-            height: 100,
             child: Card(
-              color: PrimaryScreen,
+              color: CustomColors.PrimaryScreen,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Column(
                     children: [
-                      Text(
-                        stocksList[index].name,
-                        style: TextStyle(
-                          fontSize: 20,color: GreyBold
-                        ),
-                      ),
-                      Text("\$ ${stocksList[index].price}",style: TextStyle(color: GreyMini),),
+                      Image.asset(stocksList[index].Image),
+                      Text(stocksList[index].category,style: TextStyle(color: CustomColors.GreyMini),),
                     ],
                   ),
                 ),

@@ -2,15 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 
-class CompanyStocks {
-  String name;
-  double price;
-  CompanyStocks({this.name, this.price});
+class Category {
+  String Image;
+  String category;
+  Category(this.Image, this.category);
 }
 
 class JokeModel {
-  JokeModel({this.setup, this.delivery, this.id, this.category,});
 
+  JokeModel({this.setup, this.delivery, this.id, this.category,});
   String setup;
   String delivery;
   int id;

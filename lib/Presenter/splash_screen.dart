@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
 import '../constants.dart';
 import '../main.dart';
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Lato',
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: OnboardScreen(),
     );
@@ -53,9 +56,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
         centerTitle: true,
         title: Text(
           "Food Express",
-          style: TextStyle(color: GreyMiniBold),
+          style: TextStyle(color: CustomColors.GreyMiniBold),
         ),
-        backgroundColor: PrimaryScreen,
+        backgroundColor: CustomColors.PrimaryScreen,
       ),
       backgroundColor: Colors.white,
       body: Stack(
@@ -107,10 +110,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
                   onPressed: () {},
                   child: Text(
                     "Previous",
-                    style: TextStyle(fontSize: 18, color: GreyMini),
+                    style: TextStyle(fontSize: 18, color: CustomColors.GreyMini),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: GreyBold,
+                    primary: CustomColors.GreyBold,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(20.0),
@@ -121,10 +124,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
                   onPressed: () {},
                   child: Text(
                     "Next",
-                    style: TextStyle(fontSize: 18, color: GreyMini),
+                    style: TextStyle(fontSize: 18, color: CustomColors.GreyMini),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: GreyBold,
+                    primary: CustomColors.GreyBold,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.0),
@@ -147,10 +150,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage())),
               child: Text(
                 "Get Started",
-                style: TextStyle(fontSize: 18, color: GreyMini),
+                style: TextStyle(fontSize: 18, color: CustomColors.GreyMini),
               ),
               style: ElevatedButton.styleFrom(
-                primary: GreyBold,
+                primary: CustomColors.GreyBold,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
               ),
@@ -168,7 +171,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
       height: 6,
       width: currentIndex == index ? 20 : 6,
       decoration: BoxDecoration(
-        color: currentIndex == index ? GreyMiniBold : Color(0xFFD8D8D8),
+        color: currentIndex == index ? CustomColors.GreyMiniBold : Color(0xFFD8D8D8),
         borderRadius: BorderRadius.circular(3),
       ),
     );
@@ -203,7 +206,7 @@ class PageBuilderWidget extends StatelessWidget {
           //Tite Text
           Text(title,
               style: TextStyle(
-                  color: GreyMiniBold,
+                  color: CustomColors.GreyMiniBold,
                   fontSize: 24,
                   fontWeight: FontWeight.w700)),
           const SizedBox(
@@ -213,7 +216,7 @@ class PageBuilderWidget extends StatelessWidget {
           Text(description,
               textAlign: TextAlign.justify,
               style: TextStyle(
-                color: GreyMiniBold,
+                color: CustomColors.GreyMiniBold,
                 fontSize: 14,
               ))
         ],

@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:transformer_page_view/transformer_page_view.dart';
+import 'package:fun_pluz/themeProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import '../main.dart';
 import '../model/classes.dart';
 
-void main() => runApp(MyApp());
-
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool storedValue = prefs.getBool('boolValue') ?? false;
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(isDarkTheme: storedValue),
+      child: MyApp(),
+    ),
+  );
+}
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
+      theme: themeProvider.getThemeData,
       home: OnboardScreen(),
     );
   }

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_pluz/Presenter/more.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../Bloc/JokeEvent.dart';
 import '../Bloc/JokeStates.dart';
 import '../Bloc/JokerBloc.dart';
 import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
+import '../themeProvider.dart';
 
 class HomeFragment extends StatelessWidget {
   @override
@@ -24,6 +26,7 @@ class HomeFragment extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return BlocProvider(
         create: (context) =>
             JokeBloc(RepositoryProvider.of(context))..add(LoadJokeEvent('Any')),
@@ -51,6 +54,13 @@ class Home extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Switch(
+                      value: themeProvider.isDarkTheme,
+                      onChanged: (val) {
+                        themeProvider.setThemeData = val;
+                      },
+                    ),
+
                   ],
                 ),
               ),

@@ -54,13 +54,17 @@ class Home extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Switch(
-                      value: themeProvider.isDarkTheme,
-                      onChanged: (val) {
-                        themeProvider.setThemeData = val;
-                      },
+                    Flexible(
+                      child: Container(
+                          alignment: Alignment.topRight,
+                          margin: EdgeInsets.only(top: 5, right: 20),
+                          child: Switch(
+                            value: themeProvider.isDarkTheme,
+                            onChanged: (val) {
+                              themeProvider.setThemeData = val;
+                            },
+                          )),
                     ),
-
                   ],
                 ),
               ),
@@ -81,9 +85,6 @@ class Home extends StatelessWidget {
                         alignment: Alignment.topRight,
                         margin: EdgeInsets.all(10),
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent,
-                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -95,13 +96,9 @@ class Home extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text('More'), // <-- Text
-                              SizedBox(
-                                width: 5,
-                              ),
                               Icon(
-                                // <-- Icon
                                 Icons.play_arrow_rounded,
-                                size: 24.0,
+                                size: 20.0,
                               ),
                             ],
                           ),
@@ -127,18 +124,16 @@ class Home extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             child: Card(
-              color: CustomColors.Yellow,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                          margin: EdgeInsets.all(10),
                           child: Text(
-                        stocksList[index].category,
-                        style: TextStyle(color: CustomColors.GreyMini),
-                      )),
+                            stocksList[index].category,
+                          )),
                       Image.asset(stocksList[index].Image),
                     ],
                   ),
@@ -182,7 +177,6 @@ class MyExpandableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: CustomColors.DeepGreen,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ExpansionTile(

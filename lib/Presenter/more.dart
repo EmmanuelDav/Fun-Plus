@@ -142,12 +142,11 @@ class More extends State<ViewMore> {
         border: Border.all(
             color: isSelected ? Colors.blue[300].withOpacity(0.8)
                 : Colors.grey[700]),
-        color: Colors.grey[900],
       ),
       child: Center(
           child: Text(
         category,
-        style: TextStyle(fontSize: 18, color: Colors.white),
+        style: TextStyle(fontSize: 18),
       )),
     );
   }

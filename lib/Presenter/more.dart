@@ -10,8 +10,9 @@ class ViewMore extends StatefulWidget {
   State<StatefulWidget> createState() => More();
 }
 
-class More extends State<ViewMore> {
+int _languageIndex = -1;
 
+class More extends State<ViewMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,16 +20,14 @@ class More extends State<ViewMore> {
             title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
         body: RepositoryProvider(
           create: (context) => JokeRepository(),
-          child: Scaffold(
-              body:LoadJokes()),
+          child: Scaffold(body: LoadJokes()),
         ));
   }
 
   Widget LoadJokes() {
     return BlocProvider(
         create: (context) =>
-        JokeBloc(RepositoryProvider.of(context))
-          ..add(LoadJokeEvent('Any')),
+            JokeBloc(RepositoryProvider.of(context))..add(LoadJokeEvent('Any')),
         child: BlocBuilder<JokeBloc, JokeState>(
           builder: (context, state) {
             if (state is JokeLoadingState) {
@@ -39,122 +38,74 @@ class More extends State<ViewMore> {
             if (state is JokeLoadedState) {
               return RefreshIndicator(
                   onRefresh: () async {
-                    BlocProvider.of<JokeBloc>(context).add(
-                        LoadJokeEvent('any'));
+                    BlocProvider.of<JokeBloc>(context)
+                        .add(LoadJokeEvent('any'));
                   },
                   child: Column(
                     children: [
                       Container(
-                        height: 100,
+                        height: 70,
                         child: Expanded(
                           child: ListView(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
                               GestureDetector(
-                                onTap: () async{
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('any'));
+                                onTap: () async {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('any'));
+                                  _languageIndex = 1;
                                 },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[600],
-                                  child: const Center(
-                                      child: Text(
-                                        'Random',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () async{
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Music'));
-                                },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[500],
-                                  child: const Center(
-                                      child: Text(
-                                        'Music',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () async{
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Programming'));
-                                },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[400],
-                                  child: const Center(
-                                      child: Text(
-                                        'Programming',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () async{
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Dark'));
-                                },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[300],
-                                  child: const Center(
-                                      child: Text(
-                                        'Dark',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
+                                child: _buildWidget("Any", 1),
                               ),
                               GestureDetector(
                                 onTap: () async {
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Pun'));
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Music'));
+                                  _languageIndex = 2;
+
                                 },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[300],
-                                  child: const Center(
-                                      child: Text(
-                                        'Pun',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
+                                child: _buildWidget("Music", 3),
                               ),
                               GestureDetector(
-                                onTap: (){
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Spooky'));
+                                onTap: () async {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Programming'));
+                                  _languageIndex = 4;
                                 },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[300],
-                                  child: const Center(
-                                      child: Text(
-                                        'Spooky',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
+                                child: _buildWidget("Programming", 4),
                               ),
                               GestureDetector(
-                                onTap: (){
-                                  BlocProvider.of<JokeBloc>(context).add(
-                                      LoadJokeEvent('Christmas'));
+                                onTap: () async {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Dark'));
+                                  _languageIndex = 5;
                                 },
-                                child: Container(
-                                  width: 200,
-                                  color: Colors.purple[300],
-                                  child: const Center(
-                                      child: Text(
-                                        'Christmas',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
-                                      )),
-                                ),
+                                child: _buildWidget("Dark", 5),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Pun'));
+                                  _languageIndex = 6;
+                                },
+                                child: _buildWidget("Pun", 6),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Spooky'));
+                                  _languageIndex = 7;
+                                },
+                                child:  _buildWidget("Spooky", 7),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<JokeBloc>(context)
+                                      .add(LoadJokeEvent('Christmas'));
+                                  _languageIndex = 8;
+                                },
+                                child: _buildWidget("Christmas", 8),
                               ),
                             ],
                           ),
@@ -179,6 +130,26 @@ class More extends State<ViewMore> {
             return Container();
           },
         ));
+  }
+
+  Widget _buildWidget(String category, int index) {
+    bool isSelected = _languageIndex == index;
+    return Container(
+      margin: EdgeInsets.all(3),
+      width: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+            color: isSelected ? Colors.blue[300].withOpacity(0.8)
+                : Colors.grey[700]),
+        color: Colors.grey[900],
+      ),
+      child: Center(
+          child: Text(
+        category,
+        style: TextStyle(fontSize: 18, color: Colors.white),
+      )),
+    );
   }
 }
 

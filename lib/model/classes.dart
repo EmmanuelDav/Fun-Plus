@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 
@@ -9,7 +11,6 @@ class Category {
 }
 
 class JokeModel {
-
   JokeModel({this.setup, this.delivery, this.id, this.category,});
   String setup;
   String delivery;
@@ -44,3 +45,35 @@ class OnBoardModel {
   String titlestr;
   OnBoardModel(this.imgStr, this.description, this.titlestr);
 }
+
+class HumorJokesApi{
+  String id;
+  String joke;
+
+  HumorJokesApi({this.id, this.joke});
+
+  factory HumorJokesApi.fromMap(Map<String, dynamic > json) => HumorJokesApi(
+    id: json['id'],
+    joke: json['jokes']
+  );
+
+}
+
+  Future<List<HumorJokesApi>> getListHumorData(String apiKey, String category) async {
+    List<HumorJokesApi> result;
+    try {
+      final response = await http.get(Uri.parse("https://api.humorapi.com/jokes/search?api-key=47ded75a601c45c4b13a2838f1cbcd26&number=20&keyword=$category"),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+      );
+      if (response.statusCode == 200) {
+        final item = json.decode(response.body);
+        result = HumorJokesApi.fromMap(item) as List<HumorJokesApi>;
+      }
+    } catch (e) {
+      log(e);
+    }
+    return result;
+  }
+

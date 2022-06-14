@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fun_pluz/model/classes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider with ChangeNotifier {
+
   bool isDarkTheme;
   ThemeProvider({this.isDarkTheme});
 
+  List<HumorJokesApi> post ;
+  bool loading = false;
   ThemeData get getThemeData => isDarkTheme ? darkTheme : lightTheme;
+  String _category;
 
 
   saveProperty(bool value) async {
@@ -20,6 +25,14 @@ class ThemeProvider with ChangeNotifier {
       isDarkTheme = false;
     }
     saveProperty(isDarkTheme);
+    notifyListeners();
+  }
+
+  getPostData(context) async {
+    loading = true;
+    post = await getListHumorData(context,_category);
+    loading = false;
+
     notifyListeners();
   }
 }

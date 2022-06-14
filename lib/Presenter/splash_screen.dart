@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fun_pluz/themeProvider.dart';
+import 'package:fun_pluz/Provider/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';

@@ -9,7 +9,7 @@ import '../Bloc/JokerBloc.dart';
 import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
-import '../themeProvider.dart';
+import '../Provider/themeProvider.dart';
 
 class HomeFragment extends StatelessWidget {
   @override

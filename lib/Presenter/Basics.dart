@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:provider/single_child_widget.dart';
+import '../Provider/HumorJokeDataProvider.dart';
 import '../Provider/themeProvider.dart';
 import '../model/classes.dart';
+class BasicStateful extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<SingleChildWidget> providers = [
+      ChangeNotifierProvider<HumorDataProvider>(create: (_) => HumorDataProvider()),
+    ];
+    return MultiProvider(
+      providers: providers,
+      child: BasicHumorJokeCategory(),
+    );
+  }
+}
 
 class BasicHumorJokeCategory extends StatefulWidget {
   @override
@@ -13,18 +26,17 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
   @override
   void initState() {
     super.initState();
-    final postMdl = Provider.of<ThemeProvider>(context, listen: false);
-    postMdl.getPostData(context);
+    final postMdl = Provider.of<HumorDataProvider>(context, listen: false);
+    postMdl.getPostData(context,"dad");
   }
 
   @override
   Widget build(BuildContext context) {
-    final postMdl = Provider.of<ThemeProvider>(context);
+    final postMdl = Provider.of<HumorDataProvider>(context);
     return Scaffold(
       appBar: AppBar(
           title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
       body: Container(
-        height: 200,
         child: Expanded(child: listItems(postMdl.post)),
       ),
     );

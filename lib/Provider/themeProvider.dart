@@ -6,11 +6,7 @@ class ThemeProvider with ChangeNotifier {
 
   bool isDarkTheme;
   ThemeProvider({this.isDarkTheme});
-
-  List<HumorJokesApi> post ;
-  bool loading = false;
   ThemeData get getThemeData => isDarkTheme ? darkTheme : lightTheme;
-  String _category;
 
 
   saveProperty(bool value) async {
@@ -28,13 +24,6 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getPostData(context) async {
-    loading = true;
-    post = await getListHumorData(context,_category);
-    loading = false;
-
-    notifyListeners();
-  }
 }
 
 final darkTheme = ThemeData(

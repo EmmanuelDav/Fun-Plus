@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 class Category {
   String Image;
   String category;
-
   Category(this.Image, this.category);
 }
 
@@ -47,18 +46,25 @@ class OnBoardModel {
   String imgStr;
   String description;
   String titlestr;
-
   OnBoardModel(this.imgStr, this.description, this.titlestr);
 }
 
 class HumorJokesApi {
   HumorJokesApi({this.id, this.joke,});
-
   String id;
   String joke;
 
   factory HumorJokesApi.fromMap(Map<String, dynamic> json) => HumorJokesApi(
       id: json['id'],
       joke: json['joke']
+  );
+}
+
+class ProgrammingMeme{
+  String Images;
+  ProgrammingMeme({this.Images});
+
+  factory ProgrammingMeme.fromMap(Map<String, dynamic> json) => ProgrammingMeme(
+      Images: json['image'],
   );
 }

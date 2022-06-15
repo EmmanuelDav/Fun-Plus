@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fun_pluz/model/classes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +7,10 @@ import 'package:http/http.dart' as http;
 
 class ThemeProvider with ChangeNotifier {
 
+  List<HumorJokesApi> post = [];
+  List<ProgrammingMeme> meme = [];
+  bool loading = false;
+  bool memeLoaded = false;
   bool isDarkTheme;
   ThemeProvider({this.isDarkTheme});
   ThemeData get getThemeData => isDarkTheme ? darkTheme : lightTheme;
@@ -27,13 +30,19 @@ class ThemeProvider with ChangeNotifier {
     saveProperty(isDarkTheme);
     notifyListeners();
   }
-  List<HumorJokesApi> post = [];
-  bool loading = false;
+
 
   getPostData(context) async {
     loading = true;
     post = await getListHumorData();
     loading = false;
+    notifyListeners();
+  }
+
+  getMeme(context) async {
+    memeLoaded = true;
+    meme = await getProgrammingMeme();
+    memeLoaded = false;
     notifyListeners();
   }
 
@@ -64,6 +73,31 @@ class ThemeProvider with ChangeNotifier {
     return result;
   }
 
+  Future<List<ProgrammingMeme>> getProgrammingMeme() async {
+
+    const _api_key = "c279638f4cmshaaeb00ad4a7a3f3p19c71ejsna1f5a6803d79";
+    const String _baseUrl = "https://programming-memes-images.p.rapidapi.com/v1/memes";
+    const Map<String, String> _headers = {
+      "content-type": "application/json",
+      "x-rapidapi-host": "programming-memes-images.p.rapidapi.com",
+      "x-rapidapi-key": _api_key,
+    };
+
+    List<ProgrammingMeme> result;
+    try {
+      final response = await http.get(Uri.parse(_baseUrl),headers: _headers);
+
+      if (response.statusCode == 200) {
+        final item = json.decode(response.body) as List;
+        result = item.map((e) => ProgrammingMeme.fromMap(e)).toList();
+      }else{
+        throw Exception("Failed to load joke");
+      }
+    } catch (e) {
+      log(e);
+    }
+    return result;
+  }
 }
 
 final darkTheme = ThemeData(

@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> _items = [
     HomeFragment(),
-    Categories(),
+    ExplorePage(),
     Favourite()
  ];
   int _selectedState = 0;

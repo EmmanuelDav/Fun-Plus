@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_pluz/Presenter/more.dart';
@@ -59,7 +60,9 @@ class Home extends StatelessWidget {
                       child: Container(
                           alignment: Alignment.topRight,
                           margin: EdgeInsets.only(top: 5, right: 20),
-                          child: Switch(
+                          child: CupertinoSwitch(
+                            activeColor: Colors.white,
+                            trackColor: Colors.black,
                             value: themeProvider.isDarkTheme,
                             onChanged: (val) {
                               themeProvider.setThemeData = val;

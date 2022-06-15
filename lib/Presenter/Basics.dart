@@ -20,8 +20,7 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
   Widget build(BuildContext context) {
     final postMdl = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-          title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
+      appBar: AppBar(title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
       body: Center(
         child: Container(
           child:postMdl.loading ? CircularProgressIndicator() : listItems(postMdl.post),

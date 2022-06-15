@@ -25,7 +25,7 @@ Your-api-key=************
   
 - [Dark Mode](https://medium.flutterdevs.com/implement-dark-mode-in-flutter-using-provider-158925112bf9#:~:text=There%20are%20two%20ways%20to,dark%20mode%20in%20any%20app%3A&text=We%20already%20have%20both%20the%20options%20in%20flutter.&text=We%20have%20the%20theme%20and,according%20to%20the%20system%20preferences.) - Using providers ChangeNotifierProvider to notify material Ui for changes in the theme.
 - [Rapid Api](https://rapidapi.com/hub) where we are fetching most of our programming memes and jokes from
-- [Joke api]("https://v2.jokeapi.dev) doesn't require an api key
+- [Joke api](https://v2.jokeapi.dev) doesn't require an api key
 
 ---
 # Screenshots

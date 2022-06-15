@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import '../Provider/HumorJokeDataProvider.dart';
-import '../Provider/themeProvider.dart';
 import '../model/classes.dart';
 class BasicStateful extends StatelessWidget {
   @override
@@ -27,7 +26,7 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
   void initState() {
     super.initState();
     final postMdl = Provider.of<HumorDataProvider>(context, listen: false);
-    postMdl.getPostData(context,"dad");
+    postMdl.getPostData(context);
   }
 
   @override
@@ -36,8 +35,10 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
     return Scaffold(
       appBar: AppBar(
           title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
-      body: Container(
-        child: Expanded(child: listItems(postMdl.post)),
+      body: Center(
+        child: Container(
+          child:postMdl.loading ? CircularProgressIndicator() : listItems(postMdl.post),
+        ),
       ),
     );
   }

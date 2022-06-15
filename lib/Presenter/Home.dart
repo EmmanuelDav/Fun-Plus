@@ -10,6 +10,7 @@ import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
 import '../Provider/themeProvider.dart';
+import 'Basics.dart';
 
 class HomeFragment extends StatelessWidget {
   @override
@@ -122,20 +123,29 @@ class Home extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: stocksList == 0 ? null : stocksList.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: Card(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(
-                            stocksList[index].category,
-                          )),
-                      Image.asset(stocksList[index].Image),
-                    ],
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BasicStateful()),
+              );
+            },
+            child: Container(
+              child: Card(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                              stocksList[index].category,
+                            )),
+                        Image.asset(stocksList[index].Image),
+                      ],
+                    ),
                   ),
                 ),
               ),

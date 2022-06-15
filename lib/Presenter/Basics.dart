@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fun_pluz/Provider/themeProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/single_child_widget.dart';
-import '../Provider/HumorJokeDataProvider.dart';
 import '../model/classes.dart';
-class BasicStateful extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    List<SingleChildWidget> providers = [
-      ChangeNotifierProvider<HumorDataProvider>(create: (_) => HumorDataProvider()),
-    ];
-    return MultiProvider(
-      providers: providers,
-      child: BasicHumorJokeCategory(),
-    );
-  }
-}
 
 class BasicHumorJokeCategory extends StatefulWidget {
   @override
@@ -25,13 +12,13 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
   @override
   void initState() {
     super.initState();
-    final postMdl = Provider.of<HumorDataProvider>(context, listen: false);
+    final postMdl = Provider.of<ThemeProvider>(context, listen: false);
     postMdl.getPostData(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final postMdl = Provider.of<HumorDataProvider>(context);
+    final postMdl = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
           title: Text(""), backgroundColor: Colors.transparent, elevation: 0),
@@ -49,11 +36,12 @@ class _ProviderDemoScreenState extends State<BasicHumorJokeCategory> {
         itemCount: mJokeApiArray == 0 ? null : mJokeApiArray.length,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
-          return Container(
-              child: Card(
-            margin: EdgeInsets.all(10),
-            child: Text(mJokeApiArray[index].joke),
-          ));
+          return Card(
+            child: Container(
+              margin: EdgeInsets.all(16),
+              child: Text(mJokeApiArray[index].joke,style: TextStyle(fontSize: 18),),
+            ),
+          );
         });
   }
 }

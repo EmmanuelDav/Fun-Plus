@@ -1,4 +1,4 @@
-# fun_pluz
+# Fun pluz
 
 An Flutter app built using [Bloc](https://pub.dev/packages/flutter_bloc) and [Provider](https://pub.dev/packages/provider) that consumes [Rapid Api](https://rapidapi.com/hub) to display the current trending, 
 upcoming, top rated, and popular memes, jokes and more from the programing ecosystem.

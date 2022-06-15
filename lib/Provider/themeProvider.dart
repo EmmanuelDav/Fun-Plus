@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fun_pluz/model/classes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:fun_pluz/auth/secret.dart';
 
 class ThemeProvider with ChangeNotifier {
 
@@ -49,12 +50,11 @@ class ThemeProvider with ChangeNotifier {
 
   Future<List<HumorJokesApi>> getListHumorData() async {
 
-    const _api_key = "c279638f4cmshaaeb00ad4a7a3f3p19c71ejsna1f5a6803d79";
     const String _baseUrl = "https://jokes-by-api-ninjas.p.rapidapi.com/v1/jokes?limit=10";
-    const Map<String, String> _headers = {
+    Map<String, String> _headers = {
       "content-type": "application/json",
       "x-rapidapi-host": "jokes-by-api-ninjas.p.rapidapi.com",
-      "x-rapidapi-key": _api_key,
+      "x-rapidapi-key": "$mySecretKey",
     };
 
     List<HumorJokesApi> result;
@@ -75,12 +75,11 @@ class ThemeProvider with ChangeNotifier {
 
   Future<List<ProgrammingMeme>> getProgrammingMeme() async {
 
-    const _api_key = "c279638f4cmshaaeb00ad4a7a3f3p19c71ejsna1f5a6803d79";
     const String _baseUrl = "https://programming-memes-images.p.rapidapi.com/v1/memes";
-    const Map<String, String> _headers = {
+     Map<String, String> _headers = {
       "content-type": "application/json",
       "x-rapidapi-host": "programming-memes-images.p.rapidapi.com",
-      "x-rapidapi-key": _api_key,
+      "x-rapidapi-key": mySecretKey,
     };
 
     List<ProgrammingMeme> result;

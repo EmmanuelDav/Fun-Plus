@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_pluz/Presenter/more.dart';
@@ -10,6 +11,7 @@ import '../constants.dart';
 import '../model/Data.dart';
 import '../model/classes.dart';
 import '../Provider/themeProvider.dart';
+import 'Basics.dart';
 
 class HomeFragment extends StatelessWidget {
   @override
@@ -58,7 +60,9 @@ class Home extends StatelessWidget {
                       child: Container(
                           alignment: Alignment.topRight,
                           margin: EdgeInsets.only(top: 5, right: 20),
-                          child: Switch(
+                          child: CupertinoSwitch(
+                            activeColor: Colors.white,
+                            trackColor: Colors.black,
                             value: themeProvider.isDarkTheme,
                             onChanged: (val) {
                               themeProvider.setThemeData = val;
@@ -122,20 +126,29 @@ class Home extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: stocksList == 0 ? null : stocksList.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: Card(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(
-                            stocksList[index].category,
-                          )),
-                      Image.asset(stocksList[index].Image),
-                    ],
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BasicHumorJokeCategory()),
+              );
+            },
+            child: Container(
+              child: Card(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                              stocksList[index].category,
+                            )),
+                        Image.asset(stocksList[index].Image),
+                      ],
+                    ),
                   ),
                 ),
               ),

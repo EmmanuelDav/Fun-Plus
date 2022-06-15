@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class Category {
   String Image;
   String category;
-
   Category(this.Image, this.category);
 }
 
@@ -49,40 +46,25 @@ class OnBoardModel {
   String imgStr;
   String description;
   String titlestr;
-
   OnBoardModel(this.imgStr, this.description, this.titlestr);
 }
 
 class HumorJokesApi {
   HumorJokesApi({this.id, this.joke,});
-
   String id;
   String joke;
 
   factory HumorJokesApi.fromMap(Map<String, dynamic> json) => HumorJokesApi(
       id: json['id'],
-      joke: json['jokes']
+      joke: json['joke']
   );
 }
 
-Future<List<HumorJokesApi>> getListHumorData(String apiKey, String category) async {
-  List<HumorJokesApi> result;
-  try {
-    final response = await http.get(
-      Uri.parse(
-          "https://api.humorapi.com/jokes/search?api-key=47ded75a601c45c4b13a2838f1cbcd26&number=20&keyword=$category"),
-      headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-      },
-    );
-    if (response.statusCode == 200) {
-      final item = json.decode(response.body) as List;
-      result = item.map((e) => HumorJokesApi.fromMap(e)).toList();
-    }else{
-      throw Exception("Failed to load joke");
-    }
-  } catch (e) {
-    log(e);
-  }
-  return result;
+class ProgrammingMeme{
+  String Images;
+  ProgrammingMeme({this.Images});
+
+  factory ProgrammingMeme.fromMap(Map<String, dynamic> json) => ProgrammingMeme(
+      Images: json['image'],
+  );
 }

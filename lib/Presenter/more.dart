@@ -61,11 +61,11 @@ class More extends State<ViewMore> {
                               GestureDetector(
                                 onTap: () async {
                                   BlocProvider.of<JokeBloc>(context)
-                                      .add(LoadJokeEvent('Music'));
+                                      .add(LoadJokeEvent('Musical'));
                                   _languageIndex = 2;
 
                                 },
-                                child: _buildWidget("Music", 3),
+                                child: _buildWidget("Misc", 3),
                               ),
                               GestureDetector(
                                 onTap: () async {

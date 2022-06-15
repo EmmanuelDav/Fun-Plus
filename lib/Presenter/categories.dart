@@ -1,65 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:fun_pluz/model/classes.dart';
+import 'package:provider/provider.dart';
+import '../Provider/themeProvider.dart';
 
-class Categories extends StatelessWidget {
-  // This widget is the root of your application.  
+class ExplorePage extends StatefulWidget {
+  ExplorePage({Key key}) : super(key: key);
+  @override
+  _ExplorePageState createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends State<ExplorePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    final postMdl = Provider.of<ThemeProvider>(context, listen: false);
+    postMdl.getMeme(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final postMdl = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      body: MyGridScreen(),
+      appBar: AppBar(title: Text("Programming meme"),backgroundColor: Colors.transparent, elevation: 0),
+      body: RefreshIndicator(
+        // ignore: missing_return
+        onRefresh: () async {
+          final postMdl = Provider.of<ThemeProvider>(context, listen: false);
+          postMdl.getMeme(context);
+        },
+        child: Center(
+          child:postMdl.memeLoaded? CircularProgressIndicator(): listItems(postMdl.meme),
+        ),
+      ),
     );
   }
-}
 
-class MyGridScreen extends StatefulWidget {
-  MyGridScreen({Key key}) : super(key: key);
-  @override
-  _MyGridScreenState createState() => _MyGridScreenState();
-}
-
-class _MyGridScreenState extends State<MyGridScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: GridView.extent(
-            primary: false,
-            padding: const EdgeInsets.all(16),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            maxCrossAxisExtent: 200.0,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('First', style: TextStyle(fontSize: 20)),
-                color: Colors.yellow,
+  Widget listItems(List<ProgrammingMeme> mJokeApiArray) {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: mJokeApiArray == 0 ? null : mJokeApiArray.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return Card(
+            child: Container(
+              margin: EdgeInsets.all(10),
+              child: FadeInImage(
+                fit: BoxFit.contain,
+                image: NetworkImage(mJokeApiArray[index].Images),
+                placeholder: AssetImage('assets/Images/pun.png'),
+                alignment: Alignment.center,
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Second', style: TextStyle(fontSize: 20)),
-                color: Colors.blue,
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Third', style: TextStyle(fontSize: 20)),
-                color: Colors.blue,
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Four', style: TextStyle(fontSize: 20)),
-                color: Colors.yellow,
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Fifth', style: TextStyle(fontSize: 20)),
-                color: Colors.yellow,
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Six', style: TextStyle(fontSize: 20)),
-                color: Colors.blue,
-              ),
-            ],
-          )),
-    );
+            ),
+          );
+        });
   }
 }  

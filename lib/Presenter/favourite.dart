@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider.of(context)
       )..add(LoadJokeEvent('Any')),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Random Jokes'),
-        ),
+        appBar: AppBar(title: Text('Random Jokes'), backgroundColor: Colors.transparent, elevation: 0),
         body: BlocBuilder<JokeBloc, JokeState>(
           builder: (context, state) {
             if (state is JokeLoadingState) {
